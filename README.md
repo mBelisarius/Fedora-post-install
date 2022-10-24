@@ -10,6 +10,7 @@
 ```
 sudo dnf update
 sudo dnf install dnf-plugins-core
+sudo dnf install kernel-devel kernel-headers
 ```
 
 - ## Enable and install specific RPM repositories<sup>[[4]]</sup>
