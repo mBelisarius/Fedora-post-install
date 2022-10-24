@@ -56,12 +56,17 @@ sudo dnf install kernel-devel kernel-headers
     ```
     - JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
     - Install Anaconda/Conda distribution for Python: [Anaconda distribution](https://www.anaconda.com/products/distribution)
-    - Install Spotify using snap<sup>[[11]]</sup>: `sudo snap install spotify`
+    - Install SDKMan<sup>[[11]]</sup>:
+    ```
+    curl -s "https://get.sdkman.io" | bash
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    ```
+    - Install Spotify using snap<sup>[[12]]</sup>: `sudo snap install spotify`
     - Install Discord: [Discord](https://discord.com/)
 
 - ## KDE Plasma only
 
-    - Install ocs-url for further customization<sup>[[12]]</sup>: 
+    - Install ocs-url for further customization<sup>[[13]]</sup>: 
     ```
     sudo dnf install qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
     sudo rpm -i /path/to/ocs-url*.rpm
@@ -79,5 +84,6 @@ sudo dnf install kernel-devel kernel-headers
 [8]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
 [9]: <https://wiki.winehq.org/Fedora> "Wine install guide"
 [10]: <https://github.com/cli/cli/blob/trunk/docs/install_linux.md> "GitHub CLI install guide"
-[11]: <https://www.spotify.com/br/download/linux/> "Spotify download"
-[12]: <https://store.kde.org/p/1136805/> "ocs-url download"
+[11]: <https://sdkman.io/install> "SDKMan install guide"
+[12]: <https://www.spotify.com/br/download/linux/> "Spotify download"
+[13]: <https://store.kde.org/p/1136805/> "ocs-url download"
