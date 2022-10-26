@@ -5,22 +5,25 @@
     - Change hostname: `sudo hostnamectl set-hostname [hostname]`
     - Configure zram-generator in `/etc/systemd/zram-generator.conf`<sup>[[2]]</sup>: [zram-generator.conf.example](https://github.com/mBelisarius/Fedora-post-install/blob/main/zram-generator.conf.example)
     - Configure the swapness in `/etc/sysctl.conf`<sup>[[3]]</sup>: `vm.swappiness=99`
-
 - ## Update the system
 ```
 sudo dnf update
 sudo dnf install dnf-plugins-core
 sudo dnf install kernel-devel kernel-headers
 ```
-
-- ## Enable and install specific RPM repositories<sup>[[4]]</sup>
+- ## Update the firmware
+```
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates
+sudo fwupdmgr update
+```
+- ## Enable RPM Fusion repositories<sup>[[4]]</sup>
     - Enable RPM Fusion to both free and non-free repository: `sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm`
     - RPM Fusion AppStream metadata: `sudo dnf groupupdate core`
     - RPM Fusion Multimedia post-install: 
     ```sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
     sudo dnf groupupdate sound-and-video
     ```
-
 - ## Install package managers
     - Enable Flathub repository<sup>[[5]]</sup>: `flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
     - Enable snaps from Snap Store<sup>[[6]]</sup>: `sudo dnf install snapd`
