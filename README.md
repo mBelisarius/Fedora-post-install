@@ -30,12 +30,13 @@ vm.swappiness=99
 Update the entire system
 ```
 sudo dnf update -y
-sudo dnf install -y dnf-plugins-core
-sudo dnf install -y kernel-devel kernel-headers
+sudo dnf install dnf-plugins-core -y
+sudo dnf install kernel-devel kernel-headers -y
 ```
 
-Update the firmware
+Update the firmware and UEFI (supported by some manufacturers)
 ```
+sudo fwupdmgr get-devices
 sudo fwupdmgr refresh --force
 sudo fwupdmgr get-updates
 sudo fwupdmgr update -y
@@ -45,46 +46,55 @@ sudo fwupdmgr update -y
     
 Enable RPM Fusion to both free and non-free repository: 
 ```
-sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 ```
 
 RPM Fusion AppStream metadata: 
 ```
-sudo dnf groupupdate -y core
+sudo dnf groupupdate core -y
 ```
 
 RPM Fusion Multimedia post-install: 
 ```
-sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate -y sound-and-video
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+sudo dnf groupupdate sound-and-video -y
 ```
 
 ### Install package managers
     
 Enable Flathub repository<sup>[[5]]</sup>: 
 ```
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
     
 Enable snaps from Snap Store<sup>[[6]]</sup>: 
 ```
-sudo dnf install -y snapd
+sudo dnf install snapd -y
 ```
 
 (Optional) Install Snap Store GUI: 
 ```
-sudo snap install -y snap-store
+sudo snap install snap-store -y
 ```
 
 ### GPU drivers for NVIDIA cards
 
 To install NVIDIA drivers, the recommended display server is X11 (X-org), although Wayland (XWayland) is supported starting with Fedora 35<sup>[[7]]</sup>.
 ```
-sudo dnf install -y akmod-nvidia
-sudo dnf install -y xorg-x11-drv-nvidia-cuda
-sudo dnf install -y xorg-x11-drv-nvidia-cuda-libs
-sudo dnf install -y vdpauinfo libva-vdpau-driver libva-utils
-sudo dnf install -y vulkan
+sudo dnf install akmod-nvidia -y
+sudo dnf install xorg-x11-drv-nvidia-cuda -y
+sudo dnf install xorg-x11-drv-nvidia-cuda-libs -y
+sudo dnf install vdpauinfo libva-vdpau-driver libva-utils -y
+sudo dnf install vulkan -y
+```
+
+### Tweaks
+
+Better font rendering using free substitutions for popular proprietary fonts from Microsoft and Apple operating systems. Also enables subpixel (rgb) antialiasing.
+```
+sudo dnf copr enable dawid/better_fonts -y
+sudo dnf install fontconfig-font-replacements -y
+sudo dnf install fontconfig-enhanced-defaults -y
 ```
 
 
@@ -115,14 +125,14 @@ Install your prefered text-editor (if not the default), in this case Sublime-tex
 ```
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-sudo dnf install -y sublime-text
+sudo dnf install sublime-text -y
 ```
 
 Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[10]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo dnf install -y brave-browser
+sudo dnf install brave-browser -y
 ```
 
 Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
@@ -130,14 +140,14 @@ Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconn
 Install Wine to run .exe files<sup>[[11]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
-sudo dnf install -y wine.x86_64
+sudo dnf install wine.x86_64 -y
 ```
 
 Install GitHub CLI<sup>[[12]]</sup>: 
 ```
-sudo dnf install -y 'dnf-command(config-manager)'
+sudo dnf install 'dnf-command(config-manager)' -y
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install -y gh
+sudo dnf install gh -y
 ```
 
 JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
@@ -152,7 +162,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 Install Spotify using snap<sup>[[14]]</sup>: 
 ```
-sudo snap install spotify
+sudo snap install spotify -y
 ```
 
 Install Discord: [Discord](https://discord.com/)
