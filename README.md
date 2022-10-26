@@ -24,34 +24,34 @@ vm.swappiness=99
 
 Update the entire system
 ```
-sudo dnf update
-sudo dnf install dnf-plugins-core
-sudo dnf install kernel-devel kernel-headers
+sudo dnf update -y
+sudo dnf install -y dnf-plugins-core
+sudo dnf install -y kernel-devel kernel-headers
 ```
 
 Update the firmware
 ```
 sudo fwupdmgr refresh --force
 sudo fwupdmgr get-updates
-sudo fwupdmgr update
+sudo fwupdmgr update -y
 ```
 
 ### Enable RPM Fusion repositories<sup>[[4]]</sup>
     
 Enable RPM Fusion to both free and non-free repository: 
 ```
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ```
 
 RPM Fusion AppStream metadata: 
 ```
-sudo dnf groupupdate core
+sudo dnf groupupdate -y core
 ```
 
 RPM Fusion Multimedia post-install: 
 ```
-sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate sound-and-video
+sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate -y sound-and-video
 ```
 
 ### Install package managers
@@ -63,13 +63,15 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
     
 Enable snaps from Snap Store<sup>[[6]]</sup>: 
 ```
-sudo dnf install snapd
+sudo dnf install -y snapd
 ```
 
 (Optional) Install Snap Store GUI: 
 ```
-sudo snap install snap-store
+sudo snap install -y snap-store
 ```
+
+### Reboot to apply fundamental changes such as kernel updates
 
 
 ## Installing programs
@@ -82,14 +84,15 @@ sudo snap install snap-store
 Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[7]]</sup>: 
 ```
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo` then `sudo dnf install sublime-text
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+sudo dnf install -y sublime-text
 ```
 
 Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[8]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo dnf install brave-browser
+sudo dnf install -y brave-browser
 ```
 
 Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
@@ -97,14 +100,14 @@ Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconn
 Install Wine to run .exe files<sup>[[9]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
-sudo dnf install wine.x86_64
+sudo dnf install -y wine.x86_64
 ```
 
 Install GitHub CLI<sup>[[10]]</sup>: 
 ```
-sudo dnf install 'dnf-command(config-manager)'
+sudo dnf install -y 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install gh
+sudo dnf install -y gh
 ```
 
 JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
@@ -128,7 +131,7 @@ Install Discord: [Discord](https://discord.com/)
 
 Install ocs-url for further customization<sup>[[13]]</sup>: 
 ```
-sudo dnf install qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
+sudo dnf install -y qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
 sudo rpm -i /path/to/ocs-url*.rpm
 ```
 
