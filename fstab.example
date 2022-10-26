@@ -8,6 +8,6 @@
 # After editing this file, run 'systemctl daemon-reload' to update systemd
 # units generated from this file.
 #
-UUID=7cf311b1-1229-4e14-a5d4-73a7f6d126c2   /           btrfs   subvol=root,compress=zstd:3,discard=async,space_cache,commit=60   0 0 
-UUID=EC26-E1D0                              /boot/efi   vfat    umask=0077,shortname=winnt    0 2 
-UUID=7cf311b1-1229-4e14-a5d4-73a7f6d126c2   /home       btrfs   subvol=home,compress=zstd:3,discard=async,space_cache,commit=60   0 0 
+UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx   /           btrfs   subvol=root,compress=zstd:3,discard=async,commit=60,usebackuproot   0 0 
+UUID=XXXX-XXXX                              /boot/efi   vfat    umask=0077,shortname=winnt    0 2 
+UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx   /home       btrfs   subvol=home,compress=zstd:3,discard=async,commit=60,usebackuproot   0 0 
