@@ -1,7 +1,7 @@
-# Fedora post-install guide
+# Fedora Workstation post-install guide
 
 
-Fedora post-install guide, currently for Fedora 36. 
+Fedora Workstation Edition post-install guide, currently for Fedora 36. 
 
 Remember to reboot the system to apply fundamental changes such as kernel updates.
 
