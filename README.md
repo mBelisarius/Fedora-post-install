@@ -1,5 +1,9 @@
 # Fedora post-install guide
 
+Fedora post-install guide, currently for Fedora 36. 
+
+Remember to reboot the system to apply fundamental changes such as kernel updates.
+
 
 ## System
 
@@ -71,8 +75,16 @@ sudo dnf install -y snapd
 sudo snap install -y snap-store
 ```
 
-### Reboot to apply fundamental changes such as kernel updates
+### GPU drivers for NVIDIA cards
 
+To install NVIDIA drivers, the system must be on X11 (X-org) display server.
+```
+sudo dnf install -y akmod-nvidia
+sudo dnf install -y xorg-x11-drv-nvidia-cuda
+sudo dnf install -y xorg-x11-drv-nvidia-cuda-libs
+sudo dnf install -y vdpauinfo libva-vdpau-driver libva-utils
+sudo dnf install -y vulkan
+```
 
 ## Installing programs
 
