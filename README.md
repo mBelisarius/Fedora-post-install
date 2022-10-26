@@ -93,7 +93,7 @@ sudo dnf install -y vulkan
 
 ### BRTFS filesystem partitions
 
-Optimize the BRTFS filesystem partition by adding the following tags in `/etc/fstab`<sup>[[8]]</sup>. A fstab file example is given [here]().
+Optimize the BRTFS filesystem partition by adding the following tags in `/etc/fstab`<sup>[[8]]</sup>. A fstab file example is given [here](https://github.com/mBelisarius/Fedora-post-install/blob/main/fstab.example).
 ```
 compress=zstd:3,discard=async,space_cache,commit=60
 ```
