@@ -105,7 +105,7 @@ sudo dnf install fontconfig-enhanced-defaults -y
 
 Optimize the BRTFS filesystem partition by adding the following tags in `/etc/fstab`<sup>[[8]]</sup>. A fstab file example is given [here](https://github.com/mBelisarius/Fedora-post-install/blob/main/fstab.example).
 ```
-compress=zstd:3,discard=async,space_cache,commit=60
+compress=zstd:3,discard=async,commit=60,usebackuproot
 ```
 
 To update systemd, run
