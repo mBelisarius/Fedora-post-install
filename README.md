@@ -1,80 +1,138 @@
-# Fedora post-install
+# Fedora post-install guide
 
-- ## Configure the system
-    - Configure the dnf package manager in `/etc/dnf/dnf.conf`<sup>[[1]]</sup>: [dnf.conf.example](https://github.com/mBelisarius/Fedora-post-install/blob/main/dnf.conf.example)
-    - Change hostname: `sudo hostnamectl set-hostname [hostname]`
-    - Configure zram-generator in `/etc/systemd/zram-generator.conf`<sup>[[2]]</sup>: [zram-generator.conf.example](https://github.com/mBelisarius/Fedora-post-install/blob/main/zram-generator.conf.example)
-    - Configure the swapness in `/etc/sysctl.conf`<sup>[[3]]</sup>: `vm.swappiness=99`
-- ## Update the system
+
+## System
+
+
+### Configure the system
+
+Configure the dnf package manager in `/etc/dnf/dnf.conf`<sup>[[1]]</sup>: [dnf.conf.example](https://github.com/mBelisarius/Fedora-post-install/blob/main/dnf.conf.example)
+
+Change hostname: 
+```
+sudo hostnamectl set-hostname [hostname]
+```
+
+Configure zram-generator in `/etc/systemd/zram-generator.conf`<sup>[[2]]</sup>: [zram-generator.conf.example](https://github.com/mBelisarius/Fedora-post-install/blob/main/zram-generator.conf.example)
+
+Configure the swapness in `/etc/sysctl.conf`<sup>[[3]]</sup>: 
+```
+vm.swappiness=99
+```
+
+### Update the system
+
+Update the entire system
 ```
 sudo dnf update
 sudo dnf install dnf-plugins-core
 sudo dnf install kernel-devel kernel-headers
 ```
-- ## Update the firmware
+
+Update the firmware
 ```
 sudo fwupdmgr refresh --force
 sudo fwupdmgr get-updates
 sudo fwupdmgr update
 ```
-- ## Enable RPM Fusion repositories<sup>[[4]]</sup>
-    - Enable RPM Fusion to both free and non-free repository: `sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm`
-    - RPM Fusion AppStream metadata: `sudo dnf groupupdate core`
-    - RPM Fusion Multimedia post-install: 
-    ```sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-    sudo dnf groupupdate sound-and-video
-    ```
-- ## Install package managers
-    - Enable Flathub repository<sup>[[5]]</sup>: `flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
-    - Enable snaps from Snap Store<sup>[[6]]</sup>: `sudo dnf install snapd`
-    - (Optional) Install Snap Store GUI: `sudo snap install snap-store`
+
+### Enable RPM Fusion repositories<sup>[[4]]</sup>
+    
+Enable RPM Fusion to both free and non-free repository: 
+```
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+RPM Fusion AppStream metadata: 
+```
+sudo dnf groupupdate core
+```
+
+RPM Fusion Multimedia post-install: 
+```
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate sound-and-video
+```
+
+### Install package managers
+    
+Enable Flathub repository<sup>[[5]]</sup>: 
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+    
+Enable snaps from Snap Store<sup>[[6]]</sup>: 
+```
+sudo dnf install snapd
+```
+
+(Optional) Install Snap Store GUI: 
+```
+sudo snap install snap-store
+```
 
 
 ## Installing programs
 
-- ## Remove unnecessary programs
 
-- ## Install essential programs
-    - Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[7]]</sup>: 
-    ```
-    sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-    sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo` then `sudo dnf install sublime-text
-    ```
-    - Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[8]]</sup>: 
-    ```sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    sudo dnf install brave-browser
-    ```
-    - Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
-    - Install Wine to run .exe files<sup>[[9]]</sup>: 
-    ```
-    sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
-    sudo dnf install wine.x86_64
-    ```
-    - Install GitHub CLI<sup>[[10]]</sup>: 
-    ```
-    sudo dnf install 'dnf-command(config-manager)'
-    sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-    sudo dnf install gh
-    ```
-    - JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
-    - Install Anaconda/Conda distribution for Python: [Anaconda distribution](https://www.anaconda.com/products/distribution)
-    - Install SDKMan<sup>[[11]]</sup>:
-    ```
-    curl -s "https://get.sdkman.io" | bash
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
-    ```
-    - Install Spotify using snap<sup>[[12]]</sup>: `sudo snap install spotify`
-    - Install Discord: [Discord](https://discord.com/)
+### Remove unnecessary programs
 
-- ## KDE Plasma only
+### Install essential programs
 
-    - Install ocs-url for further customization<sup>[[13]]</sup>: 
-    ```
-    sudo dnf install qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
-    sudo rpm -i /path/to/ocs-url*.rpm
-    ```
-    -  Plasma Integration plugin for Chrome/Brave: [Plasma Integration](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai?)
+Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[7]]</sup>: 
+```
+sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo` then `sudo dnf install sublime-text
+```
+
+Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[8]]</sup>: 
+```
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+sudo dnf install brave-browser
+```
+
+Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
+
+Install Wine to run .exe files<sup>[[9]]</sup>: 
+```
+sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
+sudo dnf install wine.x86_64
+```
+
+Install GitHub CLI<sup>[[10]]</sup>: 
+```
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh
+```
+
+JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
+
+Install Anaconda/Conda distribution for Python: [Anaconda distribution](https://www.anaconda.com/products/distribution)
+
+Install SDKMan<sup>[[11]]</sup>:
+```
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+
+Install Spotify using snap<sup>[[12]]</sup>: 
+```
+sudo snap install spotify
+```
+
+Install Discord: [Discord](https://discord.com/)
+
+## KDE Plasma only
+
+Install ocs-url for further customization<sup>[[13]]</sup>: 
+```
+sudo dnf install qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
+sudo rpm -i /path/to/ocs-url*.rpm
+```
+
+Plasma Integration plugin for Chrome/Brave: [Plasma Integration](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai?)
 
 
 [1]: <https://dnf.readthedocs.io/en/latest/conf_ref.html> "dnf documentation"
