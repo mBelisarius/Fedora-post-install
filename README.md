@@ -1,5 +1,6 @@
 # Fedora post-install guide
 
+
 Fedora post-install guide, currently for Fedora 36. 
 
 Remember to reboot the system to apply fundamental changes such as kernel updates.
@@ -77,7 +78,7 @@ sudo snap install -y snap-store
 
 ### GPU drivers for NVIDIA cards
 
-To install NVIDIA drivers, the system must be on X11 (X-org) display server.
+To install NVIDIA drivers, the recommended display server is X11 (X-org), although Wayland (XWayland) is supported starting with Fedora 35<sup>[[7]]</sup>.
 ```
 sudo dnf install -y akmod-nvidia
 sudo dnf install -y xorg-x11-drv-nvidia-cuda
@@ -86,6 +87,23 @@ sudo dnf install -y vdpauinfo libva-vdpau-driver libva-utils
 sudo dnf install -y vulkan
 ```
 
+
+## Optimizations
+
+
+### BRTFS filesystem partitions
+
+Optimize the BRTFS filesystem partition by adding the following tags in `/etc/fstab`<sup>[[8]]</sup>. A fstab file example is given [here]().
+```
+compress=zstd:3,discard=async,space_cache,commit=60
+```
+
+To update systemd, run
+```
+sudo systemctl daemon-reload
+```
+
+
 ## Installing programs
 
 
@@ -93,14 +111,14 @@ sudo dnf install -y vulkan
 
 ### Install essential programs
 
-Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[7]]</sup>: 
+Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[9]]</sup>: 
 ```
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 sudo dnf install -y sublime-text
 ```
 
-Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[8]]</sup>: 
+Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[10]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
@@ -109,13 +127,13 @@ sudo dnf install -y brave-browser
 
 Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
 
-Install Wine to run .exe files<sup>[[9]]</sup>: 
+Install Wine to run .exe files<sup>[[11]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
 sudo dnf install -y wine.x86_64
 ```
 
-Install GitHub CLI<sup>[[10]]</sup>: 
+Install GitHub CLI<sup>[[12]]</sup>: 
 ```
 sudo dnf install -y 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
@@ -126,22 +144,24 @@ JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.
 
 Install Anaconda/Conda distribution for Python: [Anaconda distribution](https://www.anaconda.com/products/distribution)
 
-Install SDKMan<sup>[[11]]</sup>:
+Install SDKMan<sup>[[13]]</sup>:
 ```
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ```
 
-Install Spotify using snap<sup>[[12]]</sup>: 
+Install Spotify using snap<sup>[[14]]</sup>: 
 ```
 sudo snap install spotify
 ```
 
 Install Discord: [Discord](https://discord.com/)
 
+
 ## KDE Plasma only
 
-Install ocs-url for further customization<sup>[[13]]</sup>: 
+
+Install ocs-url for further customization<sup>[[15]]</sup>: 
 ```
 sudo dnf install -y qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
 sudo rpm -i /path/to/ocs-url*.rpm
@@ -156,10 +176,12 @@ Plasma Integration plugin for Chrome/Brave: [Plasma Integration](https://chrome.
 [4]: <https://rpmfusion.org/Configuration> "RPM Fusion documentation"
 [5]: <https://flatpak.org/setup/Fedora> "Flatpak setup"
 [6]: <https://snapcraft.io/install/snap-store/fedora)> "Snap install guide"
-[7]: <https://www.sublimetext.com/docs/linux_repositories.html#dnf> "Sublime text install guide"
-[8]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
-[9]: <https://wiki.winehq.org/Fedora> "Wine install guide"
-[10]: <https://github.com/cli/cli/blob/trunk/docs/install_linux.md> "GitHub CLI install guide"
-[11]: <https://sdkman.io/install> "SDKMan install guide"
-[12]: <https://www.spotify.com/br/download/linux/> "Spotify download"
-[13]: <https://store.kde.org/p/1136805/> "ocs-url download"
+[7]: <https://rpmfusion.org/Howto/NVIDIA> "NVIDIA drivers install guide for Fedora"
+[8]: <https://btrfs.readthedocs.io/en/latest/Administration.html#mount-options> "BRTFS documentation"
+[9]: <https://www.sublimetext.com/docs/linux_repositories.html#dnf> "Sublime text install guide"
+[10]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
+[11]: <https://wiki.winehq.org/Fedora> "Wine install guide"
+[12]: <https://github.com/cli/cli/blob/trunk/docs/install_linux.md> "GitHub CLI install guide"
+[13]: <https://sdkman.io/install> "SDKMan install guide"
+[14]: <https://www.spotify.com/br/download/linux/> "Spotify download"
+[15]: <https://store.kde.org/p/1136805/> "ocs-url download"
