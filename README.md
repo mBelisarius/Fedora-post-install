@@ -88,6 +88,10 @@ sudo dnf install vdpauinfo libva-vdpau-driver libva-utils -y
 sudo dnf install vulkan -y
 ```
 
+### AMD drivers
+
+Fedora ships up to date `mesa` which is all you will ever need.
+
 ### Tweaks
 
 Better font rendering using free substitutions for popular proprietary fonts from Microsoft and Apple operating systems. Also enables subpixel (rgb) antialiasing.
