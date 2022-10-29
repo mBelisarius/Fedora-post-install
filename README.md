@@ -43,6 +43,11 @@ sudo fwupdmgr update -y
 ```
 
 ### Enable RPM Fusion repositories<sup>[[4]]</sup>
+
+Add extra Fedora repositories:
+```
+sudo dnf install fedora-workstation-repositories -y
+```
     
 Enable RPM Fusion to both free and non-free repository: 
 ```
@@ -118,64 +123,98 @@ sudo systemctl daemon-reload
 ```
 
 
-## Installing programs
+## Installing applications
 
 
 ### Remove unnecessary programs
 
-### Install essential programs
+### Development tools
 
-Install your prefered text-editor (if not the default), in this case Sublime-text 3 using dnf<sup>[[9]]</sup>: 
-```
-sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-sudo dnf install sublime-text -y
-```
-
-Install your prefered navigator (if not the default), in this case Brave using dnf<sup>[[10]]</sup>: 
-```
-sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo dnf install brave-browser -y
-```
-
-Install VMWare (or VirtualBox): [VMWare Workstation Player](https://customerconnect.vmware.com/en/downloads/details?downloadGroup=WKST-PLAYER-1624&productId=1039&rPId=91446)
-
-Install Wine to run .exe files<sup>[[11]]</sup>: 
-```
-sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
-sudo dnf install wine.x86_64 -y
-```
-
-Install GitHub CLI<sup>[[12]]</sup>: 
+Install GitHub CLI<sup>[[9]]</sup>: 
 ```
 sudo dnf install 'dnf-command(config-manager)' -y
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf install gh -y
 ```
 
-JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
+Install your prefered text-editor (if not the default KWrite).
 
-Install Anaconda/Conda distribution for Python: [Anaconda distribution](https://www.anaconda.com/products/distribution)
+Sublime-text 3 using dnf<sup>[[10]]</sup>: 
+```
+sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+sudo dnf install sublime-text -y
+```
 
-Install SDKMan<sup>[[13]]</sup>:
+VSCode using dnf<sup>[[11]]</sup>:
+```
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+dnf check-update
+sudo dnf install code -y
+```
+
+Install JetBrains ToolBox for JetBrains IDEs: [JetBraibs ToolBox](https://www.jetbrains.com/toolbox-app/)
+
+Install Anaconda/Conda distribution for Python environments: [Anaconda distribution](https://www.anaconda.com/products/distribution)
+
+Install SDKMan to manage parallel versions of multiple Java SDKs<sup>[[12]]</sup>:
 ```
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ```
 
-Install Spotify using snap<sup>[[14]]</sup>: 
+Install QEMU for virtual machines<sup>[[13]]</sup>:
+```
+sudo dnf install @virtualization -y
+```
+
+### Utilities
+
+Install Flatseal to review and modify permissions from your Flatpak applications usinf flatpak<sup>[[14]]</sup>:
+```
+flatpak install -y flatseal
+```
+
+Install Wine to run .exe files<sup>[[15]]</sup>: 
+```
+sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
+sudo dnf install wine.x86_64 -y
+```
+
+### Internet and multimidia
+
+Install your prefered internet browser (if not the default FireFox).
+
+Google Chrome:
+```
+sudo dnf config-manager --set-enabled google-chrome
+sudo dnf install google-chrome-stable -y
+```
+Brave using dnf<sup>[[16]]</sup>:
+```
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+sudo dnf install brave-browser -y
+```
+
+Install Discord: [Discord](https://discord.com/)
+
+Install Spotify using snap<sup>[[17]]</sup>: 
 ```
 sudo snap install spotify -y
 ```
 
-Install Discord: [Discord](https://discord.com/)
+Install OBS Studio<sup>[[18]]</sup>:
+```
+flatpak install flathub com.obsproject.Studio
+```
 
 
 ## KDE Plasma only
 
 
-Install ocs-url for further customization<sup>[[15]]</sup>: 
+Install ocs-url for further desktop customization<sup>[[19]]</sup>: 
 ```
 sudo dnf install -y qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
 sudo rpm -i /path/to/ocs-url*.rpm
@@ -192,10 +231,14 @@ Plasma Integration plugin for Chrome/Brave: [Plasma Integration](https://chrome.
 [6]: <https://snapcraft.io/install/snap-store/fedora)> "Snap install guide"
 [7]: <https://rpmfusion.org/Howto/NVIDIA> "NVIDIA drivers install guide for Fedora"
 [8]: <https://btrfs.readthedocs.io/en/latest/Administration.html#mount-options> "BRTFS documentation"
-[9]: <https://www.sublimetext.com/docs/linux_repositories.html#dnf> "Sublime text install guide"
-[10]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
-[11]: <https://wiki.winehq.org/Fedora> "Wine install guide"
-[12]: <https://github.com/cli/cli/blob/trunk/docs/install_linux.md> "GitHub CLI install guide"
-[13]: <https://sdkman.io/install> "SDKMan install guide"
-[14]: <https://www.spotify.com/br/download/linux/> "Spotify download"
-[15]: <https://store.kde.org/p/1136805/> "ocs-url download"
+[9]: <https://github.com/cli/cli/blob/trunk/docs/install_linux.md> "GitHub CLI install guide"
+[10]: <https://www.sublimetext.com/docs/linux_repositories.html#dnf> "Sublime text install guide"
+[11]: https://code.visualstudio.com/docs/setup/linux> "Visual Studio Code on Linux"
+[12]: <https://sdkman.io/install> "SDKMan install guide"
+[13]: <https://www.qemu.org/> "QEMU"
+[14]: <https://flathub.org/apps/details/com.github.tchx84.Flatseal> "Flatseal"
+[15]: <https://wiki.winehq.org/Fedora> "Wine install guide"
+[16]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
+[17]: <https://www.spotify.com/br/download/linux/> "Spotify download"
+[18]: <https://flathub.org/apps/details/com.obsproject.Studio> "OBS Studio"
+[19]: <https://store.kde.org/p/1136805/> "ocs-url download"
