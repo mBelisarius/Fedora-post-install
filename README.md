@@ -25,6 +25,12 @@ Configure the swapness in `/etc/sysctl.conf`<sup>[[3]]</sup>:
 vm.swappiness=99
 ```
 
+Disable geoclue services (a reboot is necessary toapply the changes):
+```
+sudo systemctl disable geoclue.service
+sudo systemctl mask geoclue.service
+```
+
 ### Update the system
 
 Update the entire system
