@@ -170,19 +170,24 @@ curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ```
 
-Install QEMU for virtual machines<sup>[[13]]</sup>:
+Install .NET SDK and runtime<sup>[[13]]</sup><sup>[[14]]</sup>:
+```
+sudo dnf install dotnet -y
+```
+
+Install QEMU for virtual machines<sup>[[15]]</sup>:
 ```
 sudo dnf install @virtualization -y
 ```
 
 ### Utilities
 
-Install Flatseal to review and modify permissions from Flatpak applications using flatpak<sup>[[14]]</sup>:
+Install Flatseal to review and modify permissions from Flatpak applications using flatpak<sup>[[16]]</sup>:
 ```
 flatpak install -y flatseal
 ```
 
-Install Wine to run .exe files using dnf<sup>[[15]]</sup>: 
+Install Wine to run .exe files using dnf<sup>[[17]]</sup>: 
 ```
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/36/winehq.repo
 sudo dnf install wine.x86_64 -y
@@ -190,12 +195,12 @@ sudo dnf install wine.x86_64 -y
 
 ### Image and video editing
 
-Install Gimp for image editing using flatpak<sup>[[16]]</sup>:
+Install Gimp for image editing using flatpak<sup>[[18]]</sup>:
 ```
 flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref -y
 ```
 
-Install ShotCut for video editing using flatpak<sup>[[17]]</sup>:
+Install ShotCut for video editing using flatpak<sup>[[19]]</sup>:
 ```
 flatpak install flathub org.shotcut.Shotcut -y
 ```
@@ -209,7 +214,7 @@ Google Chrome:
 sudo dnf config-manager --set-enabled google-chrome
 sudo dnf install google-chrome-stable -y
 ```
-Brave using dnf<sup>[[18]]</sup>:
+Brave using dnf<sup>[[20]]</sup>:
 ```
 sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
@@ -218,12 +223,12 @@ sudo dnf install brave-browser -y
 
 Install Discord: [Discord](https://discord.com/)
 
-Install Spotify using snap<sup>[[19]]</sup>: 
+Install Spotify using snap<sup>[[21]]</sup>: 
 ```
 sudo snap install spotify -y
 ```
 
-Install OBS Studio<sup>[[20]]</sup>:
+Install OBS Studio<sup>[[22]]</sup>:
 ```
 flatpak install flathub com.obsproject.Studio
 ```
@@ -232,7 +237,7 @@ flatpak install flathub com.obsproject.Studio
 ## KDE Plasma only
 
 
-Install ocs-url for further desktop customization<sup>[[21]]</sup>: 
+Install ocs-url for further desktop customization<sup>[[23]]</sup>: 
 ```
 sudo dnf install -y qt5-qtbase qt5-qtbase-gui qt5-qtsvg qt5-qtdeclarative qt5-qtquickcontrols
 sudo rpm -i /path/to/ocs-url*.rpm
@@ -253,12 +258,14 @@ Plasma Integration plugin for Chrome/Brave: [Plasma Integration](https://chrome.
 [10]: <https://www.sublimetext.com/docs/linux_repositories.html#dnf> "Sublime text install guide"
 [11]: https://code.visualstudio.com/docs/setup/linux> "Visual Studio Code on Linux"
 [12]: <https://sdkman.io/install> "SDKMan install guide"
-[13]: <https://www.qemu.org/> "QEMU"
-[14]: <https://flathub.org/apps/details/com.github.tchx84.Flatseal> "Flatseal"
-[15]: <https://wiki.winehq.org/Fedora> "Wine install guide"
-[16]: <https://www.gimp.org/> "GIMP"
-[17]: <https://www.shotcut.org/> "ShotCut"
-[18]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
-[19]: <https://www.spotify.com/br/download/linux/> "Spotify download"
-[20]: <https://flathub.org/apps/details/com.obsproject.Studio> "OBS Studio"
-[21]: <https://store.kde.org/p/1136805/> "ocs-url download"
+[13]: <https://learn.microsoft.com/en-us/dotnet/core/install/linux-fedora> "Microsoft Install .NET 6 Fedora"
+[14]: <https://packages.fedoraproject.org/pkgs/dotnet6.0/> "Fedora Packages - Source Package dotnet6.0"
+[15]: <https://www.qemu.org/> "QEMU"
+[16]: <https://flathub.org/apps/details/com.github.tchx84.Flatseal> "Flatseal"
+[17]: <https://wiki.winehq.org/Fedora> "Wine install guide"
+[18]: <https://www.gimp.org/> "GIMP"
+[19]: <https://www.shotcut.org/> "ShotCut"
+[20]: <https://brave.com/linux/#release-channel-installation> "Brave install guide"
+[21]: <https://www.spotify.com/br/download/linux/> "Spotify download"
+[22]: <https://flathub.org/apps/details/com.obsproject.Studio> "OBS Studio"
+[23]: <https://store.kde.org/p/1136805/> "ocs-url download"
