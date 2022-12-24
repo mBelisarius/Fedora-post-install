@@ -1,7 +1,7 @@
 # Fedora Workstation post-install guide
 
 
-Fedora Workstation Edition post-install guide, currently for Fedora 36. 
+Fedora Workstation Edition post-install guide, currently for Fedora 37. 
 
 Remember to reboot the system to apply fundamental changes such as kernel updates.
 
@@ -83,11 +83,6 @@ Enable snaps from Snap Store<sup>[[6]]</sup>:
 sudo dnf install snapd -y
 ```
 
-(Optional) Install Snap Store GUI: 
-```
-sudo snap install snap-store -y
-```
-
 ### GPU drivers for NVIDIA cards
 
 To install NVIDIA drivers, the recommended display server is X11 (X-org), although Wayland (XWayland) is supported starting with Fedora 35<sup>[[7]]</sup>.
@@ -143,7 +138,7 @@ sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.re
 sudo dnf install gh -y
 ```
 
-Install your prefered text-editor (if not the default KWrite).
+Install your prefered text-editor.
 
 Sublime-text 3 using dnf<sup>[[10]]</sup>: 
 ```
@@ -184,7 +179,7 @@ sudo dnf install @virtualization -y
 
 Install Flatseal to review and modify permissions from Flatpak applications using flatpak<sup>[[16]]</sup>:
 ```
-flatpak install -y flatseal
+flatpak install flatseal -y
 ```
 
 Install Wine to run .exe files using dnf<sup>[[17]]</sup>: 
@@ -225,7 +220,7 @@ Install Discord: [Discord](https://discord.com/)
 
 Install Spotify using snap<sup>[[21]]</sup>: 
 ```
-sudo snap install spotify -y
+sudo snap install spotify
 ```
 
 Install OBS Studio<sup>[[22]]</sup>:
